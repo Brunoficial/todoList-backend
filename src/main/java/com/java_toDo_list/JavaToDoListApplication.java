@@ -1,13 +1,13 @@
-package com.task_manager.java_task_manager;
+package com.java_toDo_list;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JavaTaskManagerApplication {
+public class JavaToDoListApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JavaTaskManagerApplication.class, args);
+		SpringApplication.run(JavaToDoListApplication.class, args);
 	}
 
 }

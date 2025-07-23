@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.task_manager</groupId>
-	<artifactId>java_task_manager</artifactId>
+	<artifactId>java_toDo_list</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>java_task_manager</name>
 	<description>Pequeno projeto pra aprender Javaspring</description>

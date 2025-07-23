@@ -1,4 +1,4 @@
-package com.task_manager.java_task_manager;
+package com.java_toDo_list;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
