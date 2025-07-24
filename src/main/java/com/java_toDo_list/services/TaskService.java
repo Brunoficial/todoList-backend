@@ -16,8 +16,16 @@ public class TaskService {
     @Autowired
     TaskRepository taskRepository;
 
-
     public List<TaskModel> listTasks() {
-        return taskRepository.findAll();
+        List<TaskModel> tasks =  taskRepository.findAll();
+        return tasks;
+    }
+
+    public TaskModel createTask(TaskDto data) {
+        TaskModel newTask = TaskMapper.mapToTaskModel(data);
+        System.out.println("ID antes de salvar: " + newTask.getId());
+        taskRepository.save(newTask);
+
+        return newTask;
     }
 }
