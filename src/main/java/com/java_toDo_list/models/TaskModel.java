@@ -19,5 +19,5 @@ public class TaskModel {
     private String title;
 
     private String description;
-    private String state;
+    private Boolean concluded;
 }
