@@ -21,13 +21,18 @@ public class TaskController {
 
     @GetMapping("/list")
     public ResponseEntity<List<TaskModel>> getTasks() {
-        List<TaskModel> tasks = taskService.listTasks();
-        return ResponseEntity.ok(tasks);
+        return taskService.listTasks();
+
     }
 
     @PostMapping("/create")
     public ResponseEntity<TaskModel> createTask(@RequestBody TaskDto data) {
-        TaskModel newTask = taskService.createTask(data);
-        return ResponseEntity.ok(newTask);
+        return taskService.createTask(data);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
+        return taskService.deleteTask(id);
+    }
+
 }
