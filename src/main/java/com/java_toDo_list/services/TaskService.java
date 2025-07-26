@@ -7,6 +7,7 @@ import com.java_toDo_list.repositories.TaskRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 import java.lang.reflect.Field;
 
@@ -39,11 +40,30 @@ public class TaskService {
         return ResponseEntity.ok().build();
     }
 
-    public TaskModel updateTask(TaskDto data, Long id) {
-        TaskModel task = taskRepository.findById(id);
-         Field[] campos = task.getClass().getDeclaredFields();
-         for (Field campo : campos) {
-             campo.setAccessible(true);
-         }
+    @Transactional
+    public ResponseEntity<TaskModel> updateTask(TaskDto data, Long id) throws Exception{
+        Optional<TaskModel> task = taskRepository.findById(id);
+        if (task.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        TaskModel taskEntity = task.get();
+        Field[] taskFields = taskEntity.getClass().getDeclaredFields();
+        Field[] dtoFields = data.getClass().getDeclaredFields();
+
+        for (Field dtoField : dtoFields ) {
+            dtoField.setAccessible(true);
+            Object newValue = dtoField.get(data);
+
+            if (newValue != null) {
+                for (Field taskField : taskFields) {
+                    if (taskField.getName().equals(dtoField.getName())) {
+                        taskField.setAccessible(true);
+                        taskField.set(taskEntity, newValue);
+                    }
+                }
+            }
+        }
+        TaskModel updatedTask = taskRepository.save(taskEntity);
+        return ResponseEntity.ok(updatedTask);
     }
 }
