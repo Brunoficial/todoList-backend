@@ -20,10 +20,7 @@ public class TaskController {
     TaskService taskService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<TaskModel>> getTasks() {
-        return taskService.listTasks();
-
-    }
+    public ResponseEntity<List<TaskModel>> getTasks() { return taskService.listTasks(); }
 
     @PostMapping("/create")
     public ResponseEntity<TaskModel> createTask(@RequestBody TaskDto data) {
@@ -35,4 +32,8 @@ public class TaskController {
         return taskService.deleteTask(id);
     }
 
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<TaskModel> updateTask(@PathVariable Long id, @RequestBody TaskDto data) throws Exception {
+        return taskService.updateTask(data, id);
+    }
 }
