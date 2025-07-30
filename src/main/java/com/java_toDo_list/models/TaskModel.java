@@ -19,16 +19,5 @@ public class TaskModel {
     private String title;
 
     private String description;
-    private Boolean concluded;
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof TaskModel))
-            return false;
-        return super.equals(obj);
-    }
-
-    public void update(TaskModel task){
-        this.setTitle(task.getTitle());
-    }
+    private Boolean concluded = false;
 }
