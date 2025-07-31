@@ -37,6 +37,7 @@ public class TaskService {
 
     @Transactional
     public ResponseEntity<TaskDto> createTask(TaskDto data) {
+        if (data.getConcluded() == null) {data.setConcluded(false);}
         TaskModel newTask = TaskMapper.mapToTaskModel(data);
         taskRepository.save(newTask);
 
@@ -55,7 +56,7 @@ public class TaskService {
     @Transactional
     public ResponseEntity<TaskDto> updateTask(TaskDto data, Long id) throws Exception{
         TaskModel taskEntity = taskRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrei"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
 
         TaskModel taskSource = TaskMapper.mapToTaskModel(data);
         BeanUtils.copyProperties(taskSource, taskEntity, "id");
